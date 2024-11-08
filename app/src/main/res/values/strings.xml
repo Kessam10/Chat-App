@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Chat App</string>
+    <string name="image_of_the_app">image of the app</string>
+    <string name="signature">signature</string>
+    <string name="has_back_icon">has back icon</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="btn_icon">btn icon</string>
+    <string name="or_create_account">Or Create Account?</string>
+    <string name="full_name">Full Name</string>
+    <string name="crate_acc">Create Account</string>
+    <string name="already_have_account">Have an Account?</string>
+    <string name="ok">Ok</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="add_new_room">Add New Room</string>
+    <string name="chat_app">Chat App</string>
+    <string name="image_of_create_room">image of create room</string>
+    <string name="room_name">Room Name</string>
+    <string name="room_desc">Room Description</string>
+    <string name="category_image">category image</string>
+    <string name="selected_room_category_image">selected room category image</string>
+    <string name="create_room">Create Room</string>
+    <string name="category_image_content_description">Category image content description</string>
+    <string name="send">Send</string>
+    <string name="send_message_button_icon">send message button icon</string>
+    <string name="type_a_message">Type a message</string>
+</resources>
