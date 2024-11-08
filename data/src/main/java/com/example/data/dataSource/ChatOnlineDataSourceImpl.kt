@@ -88,7 +88,7 @@ class ChatOnlineDataSourceImpl(private val firestore: FirebaseFirestore) : ChatO
                             DocumentChange.Type.REMOVED -> {}
                         }
                     }
-                    onMessagesFetched(snapshots.toObjects(Message::class.java) ?: listOf())
+                    onMessagesFetched(list)
                 }
         } catch (e: Exception) {
             onFailure(e)
