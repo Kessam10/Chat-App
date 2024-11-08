@@ -1,5 +1,6 @@
 package com.example.chatapp.screens.chat
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
@@ -37,7 +38,8 @@ class ChatViewModel @Inject constructor(
                 )
                 addMessageUseCase(
                     message,
-                    onSuccess = { messageState.value = "" },
+                    onSuccess = { messageState.value = ""
+                        Log.e("TAG", "sendMessage: $roomId", )},
                     onFailure = {
                         showErrorMessage("${it.message}")
                     })

@@ -13,7 +13,7 @@ data class Message(
     val roomId:String?=null
 ){
     fun formatDataTime():String{
-        val date = Date(dateTime!!)
+        val date = Date(dateTime?:0L)
         val simpleDateFormat  = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return simpleDateFormat.format(date)
     }

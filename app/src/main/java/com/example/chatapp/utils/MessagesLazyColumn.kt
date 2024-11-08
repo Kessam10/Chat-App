@@ -22,7 +22,6 @@ import com.example.chatapp.DataUtils
 import com.example.chatapp.base.BaseComposableScreen
 import com.example.chatapp.screens.chat.ChatViewModel
 import com.example.chatapp.ui.theme.bluePrimary
-import com.example.chatapp.ui.theme.gray
 import com.example.chatapp.ui.theme.gray2
 import com.example.domain.entity.Message
 
@@ -51,7 +50,9 @@ fun MessagesLazyColumn(modifier: Modifier = Modifier) {
 @Composable
 fun SentMessageCard(message: Message, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(4.dp),
         horizontalArrangement = Arrangement.End
     ) {
         Text(text = message.formatDataTime(), modifier = Modifier.align(Alignment.Bottom))
@@ -78,7 +79,10 @@ private fun SentMessageCardPreview() {
 
 @Composable
 fun ReceivedMessageCard(message: Message, modifier: Modifier = Modifier) {
-    Column {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(4.dp))
+    {
         Text(text = message.senderName ?: "", modifier = Modifier.padding(start = 8.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -39,7 +39,9 @@ import com.example.domain.entity.Room
 @Composable
 fun ChatScreen(room: Room, navController: NavController, modifier: Modifier = Modifier) {
     BaseComposableScreen<ChatViewModel> { viewModel ->
-
+        LaunchedEffect(key1 = Unit) {
+            viewModel.room = room
+        }
 
         Scaffold(topBar = {
             ChatToolbar(
