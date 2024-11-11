@@ -69,5 +69,3 @@ fun ChatNavigationNavHost(modifier: Modifier = Modifier) {
         }
     }
 }
-
-// 47 min
