@@ -39,8 +39,9 @@ import com.example.domain.entity.Room
 @Composable
 fun ChatScreen(room: Room, navController: NavController, modifier: Modifier = Modifier) {
     BaseComposableScreen<ChatViewModel> { viewModel ->
-        LaunchedEffect(key1 = Unit) {
+        LaunchedEffect(key1 = room.id) {
             viewModel.room = room
+            viewModel.listenForMessages()
         }
 
         Scaffold(topBar = {
@@ -49,7 +50,10 @@ fun ChatScreen(room: Room, navController: NavController, modifier: Modifier = Mo
                 hasBackButton = true,
                 onBackButtonClicked = {
                     navController.navigateUp()
-                })
+                },
+                hasLogoutButton = false,
+                onLogoutClicked = {}
+                )
         }) { innerPadding ->
             innerPadding
             Column(

@@ -30,6 +30,17 @@ class AuthOnlineDataSourceImpl(
         }
     }
 
+    override suspend fun logout(
+        onFailure: (throwable: Throwable) -> Unit
+    ) {
+        try {
+            firebaseAuth.signOut()
+            Log.e("TAG", "logout: user signed out" )
+        }catch (e:Exception){
+            onFailure(e)
+        }
+    }
+
     override suspend fun register(
         user: AppUser,
         password: String,

@@ -3,6 +3,7 @@ package com.example.chatapp.utils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -22,6 +23,8 @@ fun ChatToolbar(
     title: String,
     modifier: Modifier = Modifier,
     hasBackButton: Boolean = false,
+    hasLogoutButton: Boolean = false,
+    onLogoutClicked:(()->Unit)?= null,
     onBackButtonClicked: (() -> Unit)? = null
 ) {
     CenterAlignedTopAppBar(
@@ -41,6 +44,20 @@ fun ChatToolbar(
                 )
             }
         },
+        actions = {
+            if (hasLogoutButton) {
+                Image(
+                    painter = painterResource(id = R.drawable.logout_ic), // Add your logout icon in res/drawable
+                    modifier = Modifier
+                        .padding(end = 13.dp)
+                        .size(30.dp)
+                        .clickable {
+                            onLogoutClicked?.invoke()
+                        },
+                    contentDescription = stringResource(R.string.logout)
+                )
+            }
+        },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color.Transparent,
             titleContentColor = Color.White,
@@ -52,5 +69,5 @@ fun ChatToolbar(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun ChatToolbarPreview() {
-    ChatToolbar(title = "Login", hasBackButton = true)
+    ChatToolbar(title = "Login", hasBackButton = true, hasLogoutButton = true, onLogoutClicked = {})
 }

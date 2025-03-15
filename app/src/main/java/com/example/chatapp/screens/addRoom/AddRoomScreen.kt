@@ -49,7 +49,9 @@ fun AddRoomScreen(navController: NavController, modifier: Modifier = Modifier) {
                     hasBackButton = true,
                     onBackButtonClicked = {
                         navController.navigateUp()
-                    }
+                    },
+                    onLogoutClicked = {},
+                    hasLogoutButton = false
                 )
             }
         ) { innerPadding ->

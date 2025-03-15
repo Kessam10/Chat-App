@@ -23,9 +23,8 @@ fun ChatAuthTextField(label:String,state:MutableState<String>,error:String,modif
 
     Column(modifier = modifier.fillMaxWidth()) {
 
-    TextField(value = state.value, onValueChange = { newValue ->
-        state.value = newValue
-    },
+    TextField(value = state.value,
+        onValueChange = { newValue -> state.value = newValue },
         modifier = modifier.fillMaxWidth(0.85f),
         colors = TextFieldDefaults.colors(
             errorTextColor = Color.Red,

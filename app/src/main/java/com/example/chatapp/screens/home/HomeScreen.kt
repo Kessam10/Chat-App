@@ -27,11 +27,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.chatapp.ChatDestinations
 import com.example.chatapp.R
 import com.example.chatapp.base.BaseComposableScreen
+import com.example.chatapp.screens.chat.ChatViewModel
 import com.example.chatapp.screens.entity.Category
 import com.example.chatapp.screens.entity.Category.Companion.SPORT
 import com.example.chatapp.ui.theme.bluePrimary
@@ -58,7 +60,19 @@ fun HomeScreen(navController: NavController, modifier: Modifier = Modifier) {
                     contentDescription = "Icon add"
                 )
             }
-        }, topBar = { ChatToolbar(title = stringResource(id = R.string.home)) }) { innerPadding ->
+        }, topBar = {
+            ChatToolbar(
+                title = stringResource(id = R.string.home),
+                hasLogoutButton = true,
+                onLogoutClicked = {
+                    viewModel.logOut()
+                    navController.navigate(ChatDestinations.Login) {
+                        popUpTo(0) { inclusive = true } // Clears the entire back stack
+                    }
+                }
+                )
+
+        }) { innerPadding ->
             innerPadding
             Column(
                 modifier = Modifier
@@ -70,7 +84,7 @@ fun HomeScreen(navController: NavController, modifier: Modifier = Modifier) {
             ) {
                 RoomsLazyVerticalGrid(
                     viewModel = viewModel,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
                 ){room->
                     navController.navigate(room)
 
@@ -84,6 +98,10 @@ fun HomeScreen(navController: NavController, modifier: Modifier = Modifier) {
             }
 
             HomeNavigation.Idle -> {}
+            HomeNavigation.Logout->{
+                navController.navigate(ChatDestinations.Login)
+                viewModel.navigation.value = HomeNavigation.Logout
+            }
         }
     }
 }
@@ -101,7 +119,7 @@ fun RoomsLazyVerticalGrid(
                     .padding(8.dp)
                     .clickable {
                         onRoomClickListener(room)
-                        Log.e("TAG", "sendMessage: ${room.id}", )
+                        Log.e("TAG", "sendMessage: ${room.id}",)
 
                     },
                 colors = CardDefaults.cardColors(containerColor = Color.White)

@@ -26,11 +26,13 @@ class ChatViewModel @Inject constructor(
     var room: Room? = null
 
 
+
     fun sendMessage(roomId: String) {
         viewModelScope.launch {
+            val currentUserId = DataUtils.appUser?.uid?:return@launch
             if (messageState.value.trim().isNotEmpty()) {
                 val message = Message(
-                    senderId = DataUtils.appUser?.uid,
+                    senderId = currentUserId,
                     senderName = DataUtils.appUser?.fullName,
                     roomId = roomId,
                     content = messageState.value,
@@ -47,18 +49,21 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun listenForMessages() {
-        viewModelScope.launch {
-            listenForMessageUseCase(
-                room?.id?:"",
-                onMessageFetched = {list->
-                    messagesListState.clear()
-                    messagesListState.addAll(list)
-
+fun listenForMessages() {
+    viewModelScope.launch {
+        messagesListState.clear() // ✅ Clear old messages before fetching
+        listenForMessageUseCase(
+            room?.id ?: "",
+            onMessageFetched = { list ->
+                val sortedMsg = list.sortedBy { it.dateTime }
+                messagesListState.addAll(sortedMsg) // ✅ Add fresh messages
             },
-                onFailure = {
-                    showErrorMessage("${it.message}")
-                })
-        }
+            onFailure = {
+                showErrorMessage(it.message ?: "Failed to load messages")
+            }
+        )
     }
+}
+
+
 }

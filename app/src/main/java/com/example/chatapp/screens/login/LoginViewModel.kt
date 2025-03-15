@@ -1,5 +1,6 @@
 package com.example.chatapp.screens.login
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.chatapp.base.BaseViewModel
@@ -52,6 +53,7 @@ class LoginViewModel @Inject constructor(
                                     onSuccess = {
                                     hideLoading()
                                     navigation.value = LoginNavigation.Home
+                                        Log.e("TAG", "login userid: ${uid}", )
                                 }, onFailure = {
                                     hideLoading()
                                     showErrorMessage(it.message ?: "")

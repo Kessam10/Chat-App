@@ -16,6 +16,12 @@ class AuthRepositoryImpl(
         onlineDataSource.login(email, password, onSuccess, onFailure)
     }
 
+    override suspend fun logout(
+        onFailure: (throwable: Throwable) -> Unit
+    ) {
+        onlineDataSource.logout(onFailure)
+    }
+
     override suspend fun register(
         user: AppUser,
         password: String,

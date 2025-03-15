@@ -10,6 +10,10 @@ interface AuthRepository {
         onFailure: (throwable: Throwable) -> Unit
     )
 
+    suspend fun logout(
+        onFailure: (throwable: Throwable) -> Unit
+    )
+
     suspend fun register(
         user: AppUser,
         password: String,
@@ -38,6 +42,10 @@ interface AuthOnlineDataSource {
         onFailure: (throwable: Throwable) -> Unit
     )
 
+    suspend fun logout(
+        onFailure: (throwable: Throwable) -> Unit
+    )
+
     suspend fun register(
         user: AppUser,
         password: String,
@@ -56,4 +64,6 @@ interface AuthOnlineDataSource {
         onSuccess: (appUser:AppUser) -> Unit,
         onFailure: (throwable: Throwable) -> Unit
     )
+
+
 }
